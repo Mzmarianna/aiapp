@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox Math Adventures - Student Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Lexend', sans-serif;
+      background-color: #f0f2f5;
+    }
+    .roblox-gradient {
+      background: linear-gradient(135deg, #00A2FF 0%, #7E57C2 50%, #FF3CAC 100%);
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    .badge {
+      transition: all 0.3s ease;
+    }
+    .badge:hover {
+      transform: scale(1.05);
+    }
+    .badge.earned {
+      border: 2px solid #10B981;
+    }
+    .badge.locked {
+      opacity: 0.6;
+      filter: grayscale(0.8);
+    }
+    .progress-bar {
+      height: 10px;
+      border-radius: 5px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 5px;
+      background: linear-gradient(90deg, #00A2FF, #7E57C2);
+      transition: width 1s ease;
+    }
+    .tab {
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab.active {
+      border-bottom: 3px solid #00A2FF;
+      color: #00A2FF;
+      font-weight: 600;
+    }
+    .tab:hover:not(.active) {
+      background-color: #f8fafc;
+      color: #4b5563;
+    }
+    .lesson-card {
+      border-left: 4px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .lesson-card:hover {
+      background-color: #f8fafc;
+    }
+    .lesson-card.completed {
+      border-left-color: #10b981;
+    }
+    .lesson-card.in-progress {
+      border-left-color: #f59e0b;
+    }
+    .lesson-card.locked {
+      opacity: 0.7;
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      border-radius: 50%;
+      animation: fall 3s ease-in infinite;
+    }
+    @keyframes fall {
+      0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+    }
+    .badge-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    .lesson-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lesson-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .lesson-modal-content {
+      background: white;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+    .lesson-modal.active .lesson-modal-content {
+      transform: scale(1);
+    }
+    .badge-earned-animation {
+      animation: badgeEarned 1s ease-in-out;
+    }
+    @keyframes badgeEarned {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <!-- Login Screen -->
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+      <div class="text-center mb-8">
+        <div class="inline-block p-3 rounded-full roblox-gradient mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+          </svg>
+        </div>
+        <h1 class="text-3xl font-bold text-gray-800">Roblox Math Adventures</h1>
+        <p class="text-gray-600 mt-2">Student Portal Login</p>
+      </div>
+      
+      <div class="bg-white p-8 rounded-xl shadow-md">
+        <form id="loginForm" class="space-y-6">
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Username</label>
+            <input type="text" id="username" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none" placeholder="Enter your username" required>
+          </div>
+          
+          <div>
+            <label class="block text-gray-700 font-medium mb-2">Password</label>
+            <input type="password" id="password" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:border-blue-400 outline-none" placeholder="Enter your password" required>
+          </div>
+          
+          <div id="loginError" class="text-red-500 text-sm hidden">
+            Invalid username or password. Please try again.
+          </div>
+          
+          <button type="submit" class="w-full roblox-gradient text-white py-3 rounded-lg font-bold hover:opacity-90 transition-all transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400">
+            Log In
+          </button>
+        </form>
+        
+        <div class="mt-6 text-center">
+          <p class="text-sm text-gray-600">Demo credentials: username: <span class="font-semibold">player1234</span>, password: <span class="font-semibold">math1234</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Dashboard -->
+  <div id="dashboard" class="hidden">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <div class="p-2 rounded-full bg-blue-100 mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+              </svg>
+            </div>
+            <h1 class="text-xl font-bold text-gray-800">Roblox Math Adventures</h1>
+          </div>
+          
+          <div class="flex items-center">
+            <div class="mr-4 text-right">
+              <p class="text-sm text-gray-600">Welcome,</p>
+              <p class="font-semibold text-gray-800" id="studentName">Student</p>
+            </div>
+            <button id="logoutBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+              Log Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <!-- Dashboard Content -->
+      <div id="dashboardContent">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div class="card p-6">
+            <div class="flex items-center">
+              <div class="p-3 rounded-full bg-blue-100 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Current Level</p>
+                <h3 class="text-xl font-bold text-gray-800">Level 1</h3>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card p-6">
+            <div class="flex items-center">
+              <div class="p-3 rounded-full bg-green-100 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Lessons Completed</p>
+                <h3 class="text-xl font-bold text-gray-800" id="lessonsCompleted">3</h3>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card p-6">
+            <div class="flex items-center">
+              <div class="p-3 rounded-full bg-purple-100 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Badges Earned</p>
+                <h3 class="text-xl font-bold text-gray-800" id="badgesEarned">3</h3>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card p-6">
+            <div class="flex items-center">
+              <div class="p-3 rounded-full bg-yellow-100 mr-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-sm text-gray-500">Robux Earned</p>
+                <h3 class="text-xl font-bold text-gray-800">120</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Level Progress -->
+        <div class="card p-6 mb-8">
+          <h2 class="text-xl font-bold text-gray-800 mb-4">Level 1 Progress</h2>
+          <div class="mb-2 flex justify-between">
+            <span class="text-sm font-medium text-gray-700">3 of 16 lessons completed</span>
+            <span class="text-sm font-medium text-blue-600">19%</span>
+          </div>
+          <div class="progress-bar mb-4">
+            <div class="progress-fill" style="width: 19%"></div>
+          </div>
+          <p class="text-sm text-gray-600">Complete all lessons to graduate to Level 2!</p>
+        </div>
+        
+        <!-- Tabs -->
+        <div class="border-b border-gray-200 mb-6">
+          <div class="flex">
+            <div class="tab active px-6 py-3" data-tab="lessons">Lessons</div>
+            <div class="tab px-6 py-3" data-tab="badges">Badges</div>
+            <div class="tab px-6 py-3" data-tab="rewards">Rewards</div>
+          </div>
+        </div>
+        
+        <!-- Tab Content -->
+        <div id="tabContent">
+          <!-- Lessons Tab -->
+          <div id="lessonsTab" class="tab-content">
+            <div class="mb-6">
+              <h2 class="text-xl font-bold text-gray-800 mb-4">Level 1 Lessons</h2>
+              <div class="space-y-4">
+                <!-- Lesson 1 -->
+                <div class="lesson-card completed card p-4 flex items-center" data-lesson="1">
+                  <div class="mr-4 bg-green-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800">I Can Count to 10</h3>
+                    <p class="text-sm text-gray-600">Learn to count numbers from 1 to 10</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span>
+                    <p class="text-sm text-gray-500 mt-1">+10 Robux</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 2 -->
+                <div class="lesson-card completed card p-4 flex items-center" data-lesson="2">
+                  <div class="mr-4 bg-green-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800">I Can Count to 20</h3>
+                    <p class="text-sm text-gray-600">Learn to count numbers from 11 to 20</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span>
+                    <p class="text-sm text-gray-500 mt-1">+10 Robux</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 3 -->
+                <div class="lesson-card completed card p-4 flex items-center" data-lesson="3">
+                  <div class="mr-4 bg-green-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800">I Can Add</h3>
+                    <p class="text-sm text-gray-600">Learn basic addition with numbers up to 10</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">Completed</span>
+                    <p class="text-sm text-gray-500 mt-1">+15 Robux</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 4 -->
+                <div class="lesson-card in-progress card p-4 flex items-center" data-lesson="4">
+                  <div class="mr-4 bg-yellow-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800">I Can See Patterns</h3>
+                    <p class="text-sm text-gray-600">Identify and continue simple patterns</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded">In Progress</span>
+                    <p class="text-sm text-gray-500 mt-1">+15 Robux</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 5 -->
+                <div class="lesson-card card p-4 flex items-center" data-lesson="5">
+                  <div class="mr-4 bg-blue-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800">I Can Name Shapes</h3>
+                    <p class="text-sm text-gray-600">Learn to identify basic geometric shapes</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Available</span>
+                    <p class="text-sm text-gray-500 mt-1">+15 Robux</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 6 -->
+                <div class="lesson-card card p-4 flex items-center" data-lesson="6">
+                  <div class="mr-4 bg-blue-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-800">I Can Subtract</h3>
+                    <p class="text-sm text-gray-600">Learn basic subtraction with numbers up to 10</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded">Available</span>
+                    <p class="text-sm text-gray-500 mt-1">+15 Robux</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 7 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="7">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Count to 50</h3>
+                    <p class="text-sm text-gray-500">Learn to count numbers from 21 to 50</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete "I Can Subtract" first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 8 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="8">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Add Numbers up to 50</h3>
+                    <p class="text-sm text-gray-500">Practice addition with larger numbers</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete "I Can Count to 50" first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 9 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="9">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Subtract from 50</h3>
+                    <p class="text-sm text-gray-500">Practice subtraction with larger numbers</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete previous lessons first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 10 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="10">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Count Money</h3>
+                    <p class="text-sm text-gray-500">Learn to identify and count coins and bills</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete previous lessons first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 11 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="11">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Add Money</h3>
+                    <p class="text-sm text-gray-500">Practice adding different amounts of money</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete "I Can Count Money" first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 12 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="12">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Skip Count by 2</h3>
+                    <p class="text-sm text-gray-500">Learn to count by 2s (2, 4, 6, 8...)</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete previous lessons first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 13 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="13">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Skip Count by 5</h3>
+                    <p class="text-sm text-gray-500">Learn to count by 5s (5, 10, 15...)</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete "I Can Skip Count by 2" first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 14 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="14">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Skip Count by 10</h3>
+                    <p class="text-sm text-gray-500">Learn to count by 10s (10, 20, 30...)</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete "I Can Skip Count by 5" first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 15 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="15">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Count to 100</h3>
+                    <p class="text-sm text-gray-500">Learn to count numbers from 51 to 100</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete previous lessons first</p>
+                  </div>
+                </div>
+                
+                <!-- Lesson 16 -->
+                <div class="lesson-card locked card p-4 flex items-center" data-lesson="16">
+                  <div class="mr-4 bg-gray-100 p-2 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="font-semibold text-gray-600">I Can Graduate Level 1</h3>
+                    <p class="text-sm text-gray-500">Final assessment for Level 1</p>
+                  </div>
+                  <div class="text-right">
+                    <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded">Locked</span>
+                    <p class="text-sm text-gray-500 mt-1">Complete all previous lessons first</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Badges Tab -->
+          <div id="badgesTab" class="tab-content hidden">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Level 1 Badges</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              <!-- Badge 1 -->
+              <div class="badge earned card p-4 text-center">
+                <div class="badge-icon bg-blue-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800">Counting to 10</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting from 1 to 10</p>
+                <div class="mt-2">
+                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Earned</span>
+                </div>
+              </div>
+              
+              <!-- Badge 2 -->
+              <div class="badge earned card p-4 text-center">
+                <div class="badge-icon bg-purple-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800">Counting to 20</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting from 11 to 20</p>
+                <div class="mt-2">
+                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Earned</span>
+                </div>
+              </div>
+              
+              <!-- Badge 3 -->
+              <div class="badge earned card p-4 text-center">
+                <div class="badge-icon bg-green-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800">Addition Master</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered basic addition</p>
+                <div class="mt-2">
+                  <span class="bg-green-100 text-green-800 text-xs font-medium px-2 py-0.5 rounded">Earned</span>
+                </div>
+              </div>
+              
+              <!-- Badge 4 -->
+              <div class="badge card p-4 text-center">
+                <div class="badge-icon bg-yellow-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-800">Pattern Spotter</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered identifying patterns</p>
+                <div class="mt-2">
+                  <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-0.5 rounded">In Progress</span>
+                </div>
+              </div>
+              
+              <!-- Badge 5 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Shape Expert</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered identifying shapes</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 6 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Subtraction Star</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered basic subtraction</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 7 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Counting to 50</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting from 21 to 50</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 8 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Addition Pro</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered addition up to 50</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 9 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Subtraction Pro</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered subtraction from 50</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 10 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Money Counter</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting money</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 11 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Money Master</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered adding money</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 12 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Skip Counter (2s)</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting by 2s</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 13 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Skip Counter (5s)</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting by 5s</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 14 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Skip Counter (10s)</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting by 10s</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 15 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Counting to 100</h3>
+                <p class="text-xs text-gray-500 mt-1">Mastered counting from 51 to 100</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+              
+              <!-- Badge 16 -->
+              <div class="badge locked card p-4 text-center">
+                <div class="badge-icon bg-gray-100 mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                  </svg>
+                </div>
+                <h3 class="font-semibold text-gray-600">Level 1 Graduate</h3>
+                <p class="text-xs text-gray-500 mt-1">Completed all Level 1 lessons</p>
+                <div class="mt-2">
+                  <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2 py-0.5 rounded">Locked</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Rewards Tab -->
+          <div id="rewardsTab" class="tab-content hidden">
+            <div class="mb-8">
+              <h2 class="text-xl font-bold text-gray-800 mb-4">Your Rewards</h2>
+              
+              <div class="card p-6 mb-6">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-semibold text-gray-800">Robux Earned</h3>
+                  <span class="text-2xl font-bold text-blue-600">120</span>
+                </div>
+                <div class="progress-bar mb-4">
+                  <div class="progress-fill" style="width: 24%"></div>
+                </div>
+                <p class="text-sm text-gray-600">120 of 500 Robux needed for next reward tier</p>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card p-6">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Available Rewards</h3>
+                  <ul class="space-y-3">
+                    <li class="flex items-center">
+                      <div class="bg-green-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span class="text-gray-700">Basic Avatar Accessory (100 Robux)</span>
+                    </li>
+                    <li class="flex items-center">
+                      <div class="bg-green-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <span class="text-gray-700">Math Hero Badge (20 Robux)</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="card p-6">
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">Upcoming Rewards</h3>
+                  <ul class="space-y-3">
+                    <li class="flex items-center opacity-60">
+                      <div class="bg-gray-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <span class="text-gray-600">Premium Avatar Bundle (250 Robux)</span>
+                    </li>
+                    <li class="flex items-center opacity-60">
+                      <div class="bg-gray-100 p-2 rounded-full mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                      </div>
+                      <span class="text-gray-600">Exclusive Game Access (500 Robux)</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="mt-6">
+                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                  Redeem Rewards
+                </button>
+              </div>
+            </div>
+            
+            <div>
+              <h2 class="text-xl font-bold text-gray-800 mb-4">Reward History</h2>
+              <div class="card p-4">
+                <div class="overflow-x-auto">
+                  <table class="w-full text-sm text-left text-gray-700">
+                    <thead class="text-xs uppercase bg-gray-50">
+                      <tr>
+                        <th class="px-4 py-3">Date</th>
+                        <th class="px-4 py-3">Reward</th>
+                        <th class="px-4 py-3">Robux</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="border-b">
+                        <td class="px-4 py-3">May 15, 2023</td>
+                        <td class="px-4 py-3">Completed "I Can Count to 10"</td>
+                        <td class="px-4 py-3">+10</td>
+                      </tr>
+                      <tr class="border-b bg-gray-50">
+                        <td class="px-4 py-3">May 17, 2023</td>
+                        <td class="px-4 py-3">Completed "I Can Count to 20"</td>
+                        <td class="px-4 py-3">+10</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3">May 20, 2023</td>
+                        <td class="px-4 py-3">Completed "I Can Add"</td>
+                        <td class="px-4 py-3">+15</td>
+                      </tr>
+                      <tr class="border-b bg-gray-50">
+                        <td class="px-4 py-3">May 21, 2023</td>
+                        <td class="px-4 py-3">5-Day Login Streak</td>
+                        <td class="px-4 py-3">+25</td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-3">May 22, 2023</td>
+                        <td class="px-4 py-3">Perfect Score Bonus</td>
+                        <td class="px-4 py-3">+10</td>
+                      </tr>
+                      <tr class="border-b bg-gray-50">
+                        <td class="px-4 py-3">May 24, 2023</td>
+                        <td class="px-4 py-3">Quick Completion Bonus</td>
+                        <td class="px-4 py-3">+50</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Lesson Modal -->
+  <div id="lessonModal" class="lesson-modal">
+    <div class="lesson-modal-content">
+      <div class="roblox-gradient p-6">
+        <div class="flex justify-between items-center">
+          <h2 class="text-2xl font-bold text-white" id="lessonTitle">Lesson Title</h2>
+          <button id="closeModal" class="text-white hover:text-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      
+      <div class="p-6" id="lessonContent">
+        <!-- Lesson content will be inserted here -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Badge Earned Modal -->
+  <div id="badgeEarnedModal" class="lesson-modal">
+    <div class="lesson-modal-content max-w-md">
+      <div class="p-8 text-center">
+        <div id="badgeIcon" class="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center badge-earned-animation">
+          <!-- Badge icon will be inserted here -->
+        </div>
+        <h2 class="text-2xl font-bold text-gray-800 mb-2" id="badgeName">Badge Name</h2>
+        <p class="text-gray-600 mb-6" id="badgeDescription">Badge description</p>
+        <div class="mb-6">
+          <span class="bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full">+15 Robux</span>```

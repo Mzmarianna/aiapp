@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox Math Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Lexend', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 py-10 px-4">
+  <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold text-center text-[#00A2FF] mb-6">Register for Roblox Challenge</h1>
+
+    <form id="registrationForm" action="https://sheetdb.io/api/v1/gu6zkvng833fg" method="POST">
+      <input type="hidden" name="sheetdb" value="form">
+      <input type="hidden" name="data[Student Username]" id="studentUsername">
+      <input type="hidden" name="data[Student Password]" id="studentPassword">
+
+      <label class="block mb-2 font-semibold">Student Name</label>
+      <input type="text" name="data[Name]" class="w-full mb-4 p-2 border rounded" required>
+
+      <label class="block mb-2 font-semibold">Parent Email</label>
+      <input type="email" name="data[Email]" class="w-full mb-4 p-2 border rounded" required>
+
+      <label class="block mb-2 font-semibold">Parent Phone Number</label>
+      <input type="tel" name="data[Phone]" class="w-full mb-4 p-2 border rounded" required>
+
+      <label class="block mb-2 font-semibold">Roblox Username</label>
+      <input type="text" name="data[Roblox Username]" class="w-full mb-4 p-2 border rounded" required>
+
+      <label class="block mb-2 font-semibold">Choose Starting Level</label>
+      <select name="data[Starting Level]" class="w-full mb-4 p-2 border rounded" required>
+        <option value="">-- Select Level --</option>
+        <option value="Level 1">Level 1 - Easiest (Best for younger students or earning more Robux)</option>
+        <option value="Level 2">Level 2 - Adding, Subtracting</option>
+        <option value="Level 3">Level 3 - Multiplication & Fractions</option>
+        <option value="Level 4">Level 4 - Divsion & Word Problems</option>
+        <option value="Level 5">Level 5 - Long Division, Decimals, PEMDAS</option>
+      </select>
+
+      <label class="block mb-2 font-semibold">Which Challenges Do You Want?</label>
+      <select name="data[Challenge Type]" class="w-full mb-6 p-2 border rounded" required>
+        <option value="">-- Select One --</option>
+        <option value="Math">Math Only</option>
+        <option value="Reading">Reading Only</option>
+        <option value="Both">Math & Reading</option>
+      </select>
+
+      <button type="submit" class="w-full bg-gradient-to-r from-[#00A2FF] to-[#FF3CAC] text-white py-3 rounded-lg font-bold hover:from-[#0090e0] hover:to-[#e6399b] transition-all">
+        Submit Registration
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById("registrationForm");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const random = Math.floor(Math.random() * 9000 + 1000);
+      const username = "Challenger" + random;
+      const password = "Robloxian" + random;
+
+      document.getElementById("studentUsername").value = username;
+      document.getElementById("studentPassword").value = password;
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+      }).then(response => {
+        form.innerHTML = `
+          <h2 class="text-xl font-bold text-green-600 text-center mt-4">✅ Registration successful!</h2>
+          <p class="text-center mt-2 text-gray-700">Your portal login info:</p>
+          <div class="mt-4 text-center">
+            <p><strong>Username:</strong> ${username}</p>
+            <p><strong>Password:</strong> ${password}</p>
+            <p class="text-sm mt-2 text-gray-500">Please save this info to log into your Challenge Portal.</p>
+          </div>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>

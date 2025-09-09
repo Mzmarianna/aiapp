@@ -1,0 +1,90 @@
+Mz. Marianna's Tutoring Platform
+
+Welcome to the official development space for Mz. Marianna's Tutoring Platform—a dynamic, gamified educational site that blends the joy of learning with powerful backend tools for payments, progress tracking, and rewards like Robux. This platform is designed for neurodivergent students and their families seeking a fun, personalized academic experience.
+
+🌟 Project Goals
+
+Offer a student & parent dashboard with real-time progress updates and reward tracking
+
+Enable ClassWallet integration for ESA payments
+
+Host interactive Roblox Math & Reading program pages
+
+Provide certificates, badges, and Robux code delivery
+
+Create a seamless marketing funnel to onboard and convert new families
+
+🚀 Tech Stack
+
+Layer
+
+Tool/Framework
+
+Purpose
+
+Frontend
+
+React + Tailwind CSS + Vite
+
+UI and speed
+
+Backend
+
+Node.js + Express or Next.js
+
+API endpoints + auth
+
+Auth
+
+Clerk or Firebase Auth
+
+Secure login/signup
+
+Database
+
+Supabase or Firebase
+
+Store user progress and Robux data
+
+Deployment
+
+Vercel
+
+Hosting and CI/CD
+
+📁 Folder Structure
+
+mz-marianna-platform/
+├── public/                 # Static files (logo, favicons)
+├── src/
+│   ├── components/         # Reusable UI pieces
+│   ├── pages/              # Site routes
+│   ├── styles/             # Tailwind or global styles
+│   ├── lib/                # Utility functions (e.g., ClassWallet API)
+│   └── api/                # Endpoints for Robux, certificates, etc.
+├── tests/                  # Unit/integration tests
+├── .env.local              # Environment variables
+├── .gitignore
+├── LICENSE (CC0)
+├── README.md
+├── tailwind.config.js
+└── package.json
+
+🧪 MVP Feature List
+
+
+
+🔐 Security Notes
+
+Secure all API routes with an API key or token-based system
+
+Avoid storing Robux codes in plaintext
+
+Use HTTPS in production and secure environment variables with .env
+
+🛠 Development Setup
+
+npm install
+npm run dev
+
+

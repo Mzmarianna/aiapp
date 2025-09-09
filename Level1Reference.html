@@ -1,0 +1,928 @@
+Python 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license()" for more information.
+
+
+
+
+
+Share
+
+You said:
+Please, can you combine the badges with this code and turn it into a google sheet : html
+<!-- Overview -->
+<div class="card p-6 mb-8">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Level 1 Overview</h2>
+  <p class="text-gray-700 mb-4">Level 1 focuses on foundational math skills for early learners. Students will master counting, basic addition and subtraction, pattern recognition, shape identification, and skip counting. This level builds the essential numeracy skills needed for future mathematical concepts.</p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+    <div class="bg-blue-50 p-4 rounded-lg">
+      <h3 class="font-semibold text-blue-800 mb-2">Learning Objectives</h3>
+      <ul class="text-blue-700 text-sm space-y-1">
+        <li>• Count numbers from 1 to 100</li>
+        <li>• Perform basic addition and subtraction</li>
+        <li>• Recognize and continue patterns</li>
+        <li>• Identify basic geometric shapes</li>
+        <li>• Count money and perform simple transactions</li>
+        <li>• Skip count by 2s, 5s, and 10s</li>
+      </ul>
+    </div>
+    
+    <div class="bg-purple-50 p-4 rounded-lg">
+      <h3 class="font-semibold text-purple-800 mb-2">Assessment Methods</h3>
+      <ul class="text-purple-700 text-sm space-y-1">
+        <li>• Interactive digital exercises</li>
+        <li>• Visual recognition activities</li>
+        <li>• Drag-and-drop problem solving</li>
+        <li>• Virtual manipulatives</li>
+        <li>• Game-based challenges</li>
+        <li>• End-of-level assessment</li>
+      </ul>
+    </div>
+    
+    <div class="bg-green-50 p-4 rounded-lg">
+      <h3 class="font-semibold text-green-800 mb-2">Rewards & Motivation</h3>
+      <ul class="text-green-700 text-sm space-y-1">
+        <li>• 16 achievement badges</li>
+        <li>• 100 Robux per badge earned</li>
+        <li>• Rewards redeemable at 800 Robux (8 badges)</li>
+        <li>• Virtual certificates</li>
+        <li>• Unlockable avatar items</li>
+        <li>• Level graduation ceremony</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Robux Redemption Info -->
+<div class="card p-6 mb-8 bg-yellow-50 border border-yellow-200">
+  <div class="flex items-start">
+    <div class="bg-yellow-100 p-2 rounded-full mr-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-2">Robux Reward System</h3>
+      <p class="text-gray-700 mb-2">Each badge earned awards the student with <strong>100 Robux</strong>. Students can redeem their rewards once they've accumulated <strong>800 Robux</strong> (equivalent to earning 8 badges).</p>
+      <p class="text-gray-700">Redemption options include avatar accessories, game passes, and exclusive in-game items. Teachers should track student progress and facilitate redemption when students reach the threshold.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Lessons Table -->
+<div class="card p-6 mb-8">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Level 1 Lessons & Skills</h2>
+  
+  <div class="overflow-x-auto">
+    <table class="w-full text-left">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-3 text-gray-700 font-semibold">#</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Lesson</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Skills</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Feedback Prompts</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Badge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Lesson 1 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">1</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Count to 10</div>
+            <div class="text-sm text-gray-600">Learn to count numbers from 1 to 10</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Number recognition (1-10)</li>
+              <li>• Counting objects</li>
+              <li>• Number sequencing</li>
+              <li>• One-to-one correspondence</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job counting all the objects!"</li>
+              <li>• "You correctly identified the number [X]!"</li>
+              <li>• "Try again! Count each object one by one."</li>
+              <li>• "Remember, we start counting from 1."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-blue-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Counting to 10</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 2 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">2</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Count to 20</div>
+            <div class="text-sm text-gray-600">Learn to count numbers from 11 to 20</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Number recognition (11-20)</li>
+              <li>• Teen number patterns</li>
+              <li>• Counting forward and backward</li>
+              <li>• Identifying numbers before/after</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Excellent work with those teen numbers!"</li>
+              <li>• "You're getting good at counting beyond 10!"</li>
+              <li>• "Remember, after 19 comes 20."</li>
+              <li>• "Try again! Count carefully from 11 to 20."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-purple-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Counting to 20</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 3 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">3</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Add</div>
+            <div class="text-sm text-gray-600">Learn basic addition with numbers up to 10</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Understanding addition concept</li>
+              <li>• Using visual models to add</li>
+              <li>• Addition facts to 10</li>
+              <li>• Solving simple word problems</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job adding those numbers!"</li>
+              <li>• "You're becoming an addition expert!"</li>
+              <li>• "Try counting all objects to find the total."</li>
+              <li>• "Remember, addition means combining groups."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-green-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Addition Master</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 4 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">4</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can See Patterns</div>
+            <div class="text-sm text-gray-600">Identify and continue simple patterns</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Recognizing repeating patterns</li>
+              <li>• Creating patterns</li>
+              <li>• Extending patterns</li>
+              <li>• Identifying pattern rules</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "You found the pattern! Great observation!"</li>
+              <li>• "Nice job continuing the pattern!"</li>
+              <li>• "Look carefully at how the pattern repeats."</li>
+              <li>• "What comes next in the pattern?"</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-yellow-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Pattern Spotter</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 5 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">5</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Name Shapes</div>
+            <div class="text-sm text-gray-600">Learn to identify basic geometric shapes</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Identifying 2D shapes</li>
+              <li>• Describing shape attributes</li>
+              <li>• Sorting shapes</li>
+              <li>• Finding shapes in the environment</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "You correctly identified the [shape]!"</li>
+              <li>• "Great job counting the sides of the shape!"</li>
+              <li>• "Remember, a triangle has 3 sides."</li>
+              <li>• "Look at the number of corners to help you."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-indigo-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Shape Expert</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 6 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">6</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Subtract</div>
+            <div class="text-sm text-gray-600">Learn basic subtraction with numbers up to 10</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Understanding subtraction concept</li>
+              <li>• Using visual models to subtract</li>
+              <li>• Subtraction facts from 10</li>
+              <li>• Solving simple word problems</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Excellent subtraction skills!"</li>
+              <li>• "You're getting good at taking away!"</li>
+              <li>• "Remember, subtraction means taking away."</li>
+              <li>• "Try counting how many are left after taking away."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-red-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Subtraction Star</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 7 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">7</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Count to 50</div>
+            <div class="text-sm text-gray-600">Learn to count numbers from 21 to 50</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Number recognition (21-50)</li>
+              <li>• Counting by ones</li>
+              <li>• Understanding place value</li>
+              <li>• Ordering numbers</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job counting to 50!"</li>
+              <li>• "You're getting good with larger numbers!"</li>
+              <li>• "Remember the pattern in the tens place."</li>
+              <li>• "Try again! Count carefully from 21 to 50."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-blue-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Counting to 50</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- Lessons Table Continued -->
+<div class="card p-6 mb-8">
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">Level 1 Lessons & Skills (Continued)</h2>
+  
+  <div class="overflow-x-auto">
+    <table class="w-full text-left">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-3 text-gray-700 font-semibold">#</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Lesson</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Skills</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Feedback Prompts</th>
+          <th class="px-4 py-3 text-gray-700 font-semibold">Badge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Lesson 8 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">8</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Add Numbers up to 50</div>
+            <div class="text-sm text-gray-600">Practice addition with larger numbers</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Adding single-digit numbers</li>
+              <li>• Adding to teen numbers</li>
+              <li>• Adding tens</li>
+              <li>• Using number lines for addition</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Excellent work with larger numbers!"</li>
+              <li>• "You're becoming an addition expert!"</li>
+              <li>• "Remember to start with the ones place."</li>
+              <li>• "Try using the number line to help you."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-green-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Addition Pro</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 9 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">9</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Subtract from 50</div>
+            <div class="text-sm text-gray-600">Practice subtraction with larger numbers</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Subtracting single-digit numbers</li>
+              <li>• Subtracting from teen numbers</li>
+              <li>• Subtracting tens</li>
+              <li>• Using number lines for subtraction</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job with subtraction!"</li>
+              <li>• "You're getting good at taking away larger numbers!"</li>
+              <li>• "Remember to start with the ones place."</li>
+              <li>• "Try counting backward to find the answer."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-red-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Subtraction Pro</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 10 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">10</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Count Money</div>
+            <div class="text-sm text-gray-600">Learn to identify and count coins and bills</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Identifying coins and bills</li>
+              <li>• Counting pennies, nickels, dimes</li>
+              <li>• Counting mixed coins</li>
+              <li>• Understanding coin values</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job identifying that coin!"</li>
+              <li>• "You counted the money correctly!"</li>
+              <li>• "Remember, a nickel is worth 5 cents."</li>
+              <li>• "Try counting the coins by their values."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-yellow-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Money Counter</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 11 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">11</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Add Money</div>
+            <div class="text-sm text-gray-600">Practice adding different amounts of money</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Adding coin values</li>
+              <li>• Making change</li>
+              <li>• Solving money word problems</li>
+              <li>• Understanding dollar notation</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job adding those coins!"</li>
+              <li>• "You made the correct change!"</li>
+              <li>• "Remember to line up the decimal points."</li>
+              <li>• "Try counting up from the smaller amount."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-yellow-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Money Master</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 12 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">12</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Skip Count by 2</div>
+            <div class="text-sm text-gray-600">Learn to count by 2s (2, 4, 6, 8...)</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Counting by 2s to 20</li>
+              <li>• Recognizing even numbers</li>
+              <li>• Using number lines</li>
+              <li>• Finding patterns in skip counting</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job counting by 2s!"</li>
+              <li>• "You found all the even numbers!"</li>
+              <li>• "Remember, we add 2 each time."</li>
+              <li>• "Try using the number line to help you."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-purple-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Skip Counter (2s)</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 13 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">13</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Skip Count by 5</div>
+            <div class="text-sm text-gray-600">Learn to count by 5s (5, 10, 15...)</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Counting by 5s to 50</li>
+              <li>• Recognizing patterns in 5s</li>
+              <li>• Using number lines</li>
+              <li>• Connecting to clock reading</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Excellent job counting by 5s!"</li>
+              <li>• "You found the pattern in the numbers!"</li>
+              <li>• "Remember, we add 5 each time."</li>
+              <li>• "Look at the pattern in the ones place."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-purple-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Skip Counter (5s)</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 14 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">14</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Skip Count by 10</div>
+            <div class="text-sm text-gray-600">Learn to count by 10s (10, 20, 30...)</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Counting by 10s to 100</li>
+              <li>• Recognizing patterns in 10s</li>
+              <li>• Understanding place value</li>
+              <li>• Using a hundreds chart</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Great job counting by 10s!"</li>
+              <li>• "You noticed the pattern in the tens place!"</li>
+              <li>• "Remember, only the tens digit changes."</li>
+              <li>• "Try using the hundreds chart to help you."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-purple-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Skip Counter (10s)</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 15 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">15</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Count to 100</div>
+            <div class="text-sm text-gray-600">Learn to count numbers from 51 to 100</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Number recognition (51-100)</li>
+              <li>• Counting by ones</li>
+              <li>• Understanding place value</li>
+              <li>• Using a hundreds chart</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Excellent job counting to 100!"</li>
+              <li>• "You're getting good with larger numbers!"</li>
+              <li>• "Remember the pattern in the tens place."</li>
+              <li>• "Try using the hundreds chart to help you."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-blue-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Counting to 100</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        
+        <!-- Lesson 16 -->
+        <tr class="table-row border-t">
+          <td class="px-4 py-4 text-gray-700 font-medium">16</td>
+          <td class="px-4 py-4">
+            <div class="font-semibold text-gray-800">I Can Graduate Level 1</div>
+            <div class="text-sm text-gray-600">Final assessment for Level 1</div>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• Comprehensive review</li>
+              <li>• Mixed problem solving</li>
+              <li>• Application of all skills</li>
+              <li>• Preparation for Level 2</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <ul class="text-sm text-gray-700 space-y-1">
+              <li>• "Congratulations on completing Level 1!"</li>
+              <li>• "You've mastered all the skills!"</li>
+              <li>• "You're ready for Level 2 challenges!"</li>
+              <li>• "Keep practicing to maintain your skills."</li>
+            </ul>
+          </td>
+          <td class="px-4 py-4">
+            <div class="flex items-center">
+              <div class="badge-icon bg-indigo-100 mr-3">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <div>
+                <div class="font-medium text-gray-800">Level 1 Graduate</div>
+                <div class="text-xs text-gray-600">+100 Robux</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Robux Redemption Options -->
+<div class="card p-6 mb-8">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Robux Redemption Options</h2>
+  <p class="text-gray-700 mb-6">Once students earn 800 Robux (8 badges), they can redeem their rewards for the following items:</p>
+  
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+      <div class="flex items-center mb-3">
+        <div class="bg-blue-100 p-2 rounded-full mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800">Avatar Items</h3>
+      </div>
+      <ul class="text-sm text-gray-700 space-y-2">
+        <li>• Math Hero Cape (800 Robux)</li>
+        <li>• Number Wizard Hat (800 Robux)</li>
+        <li>• Calculator Backpack (800 Robux)</li>
+        <li>• Counting Champion T-shirt (800 Robux)</li>
+      </ul>
+    </div>
+    
+    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+      <div class="flex items-center mb-3">
+        <div class="bg-purple-100 p-2 rounded-full mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800">Game Passes</h3>
+      </div>
+      <ul class="text-sm text-gray-700 space-y-2">
+        <li>• Math Adventure VIP Access (800 Robux)</li>
+        <li>• Bonus Level Access (800 Robux)</li>
+        <li>• Special Challenges Pack (800 Robux)</li>
+        <li>• Math Speedrun Mode (800 Robux)</li>
+      </ul>
+    </div>
+    
+    <div class="bg-white border border-gray-200 rounded-lg p-4 shadow-sm">
+      <div class="flex items-center mb-3">
+        <div class="bg-green-100 p-2 rounded-full mr-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800">Special Rewards</h3>
+      </div>
+      <ul class="text-sm text-gray-700 space-y-2">
+        <li>• Math Champion Certificate (Digital)</li>
+        <li>• Level 1 Completion Trophy (In-game)</li>
+        <li>• Math Hero Profile Badge</li>
+        <li>• Early Access to Level 2 Content</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+    <div class="flex items-start">
+      <div class="bg-blue-100 p-1 rounded-full mr-3 mt-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </div>
+      <p class="text-sm text-blue-800">
+        <strong>Teacher Note:</strong> Students can choose one reward option when they reach 800 Robux. Track student progress using the provided tracking sheet. Redemption should be facilitated during designated reward periods. Students can continue earning Robux beyond 800 for additional rewards.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Assessment Guidelines -->
+<div class="card p-6 mb-8">
+  <h2 class="text-2xl font-bold text-gray-800 mb-4">Assessment Guidelines</h2>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-3">Lesson Assessment Criteria</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex items-start">
+          <div class="bg-green-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <span><strong>Mastery:</strong> Student completes 90-100% of activities correctly with minimal assistance.</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-yellow-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+          </div>
+          <span><strong>Progressing:</strong> Student completes 70-89% of activities correctly with some assistance.</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-red-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span><strong>Needs Support:</strong> Student completes less than 70% of activities correctly and requires significant assistance.</span>
+        </li>
+      </ul>
+      
+      <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Badge Earning Requirements</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex items-start">
+          <div class="bg-purple-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <span>Complete all lesson activities with at least 80% accuracy</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-purple-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <span>Pass the end-of-lesson assessment</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-purple-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+            </svg>
+          </div>
+          <span>Complete at least 3 practice activities</span>
+        </li>
+      </ul>
+    </div>
+    
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800 mb-3">Intervention Strategies</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex items-start">
+          <div class="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span><strong>Visual Supports:</strong> Provide additional visual models and manipulatives for students who need concrete representations.</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span><strong>Scaffolded Practice:</strong> Break down complex tasks into smaller steps with guided practice for each step.</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span><strong>Alternative Explanations:</strong> Provide different ways of explaining concepts using varied vocabulary and examples.</span>
+        </li>
+        <li class="flex items-start">
+          <div class="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span><strong>Additional Practice:</strong> Assign supplementary activities focusing on specific skills that need reinforcement.</span>
+        </li>
+      </ul>
+      
+      <h3 class="text-lg font-semibold text-gray-800 mt-6 mb-3">Extension Activities</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li class="flex items-start">
+          <div class="bg-green-100 p-1 rounded-full mr-2 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+...               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+...             </svg>
+...           </div>
+...           <span><strong>Challenge Problems:</strong> Provide more complex problems that apply skills in new contexts.</span>
+...         </li>
+...         <li class="flex items-start">
+...           <div class="bg-green-100 p-1 rounded-full mr-2 mt-1">
+...             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+...               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+...             </svg>
+...           </div>
+...           <span><strong>Creative Applications:</strong> Encourage students to create their own problems or games using the math concepts.</span>
+...         </li>
+...         <li class="flex items-start">
+...           <div class="bg-green-100 p-1 rounded-full mr-2 mt-1">
+...             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+...               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+...             </svg>
+...           </div>
+...           <span><strong>Cross-Curricular Connections:</strong> Connect math concepts to other subjects like science or art.</span>
+...         </li>
+...       </ul>
+...     </div>
+...   </div>
+... </div>
+... 
+... <!-- Footer -->
+... <footer class="text-center text-gray-500 text-sm mt-12 mb-6">
+...   <p>© 2023 Roblox Math Adventures - Level 1 Curriculum Sheet</p>
+...   <p class="mt-1">For teacher reference and planning purposes</p>
